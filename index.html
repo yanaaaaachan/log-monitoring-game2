@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <!-- <button id="generate_log">start</button> -->
+        <h1><span id="score">0</span>/14</h1>
+    </div>
+
+    <div class="main">
+        <div class="table_area">
+            <table id="log_table">
+                <tr><th>line</th><th>timestamp</th><th>ip</th><th>logType</th><th>status_code</th><th>details</th></tr>
+                <!-- <tr id="line_1"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_2"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_3"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_4"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_5"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_6"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_7"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_8"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_9"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_10"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_11"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_12"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_13"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_14"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_15"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_16"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_17"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_18"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_19"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr>
+                <tr id="line_20"><td id="timestamp_data"></td><td id="ip_data"></td><td id="logType_data"></td><td id="details_data"></td></tr> -->
+                <tbody id="table_body"></tbody>
+            </table>
+        </div>
+        <div class="answer_area">
+            <div>
+                <img src="info_mark2.png" id="info_image">
+                <div id="info_direct">
+                    <h4>回答の方法</h4>
+                    <p>①怪しい行をクリック</p>
+                    <p>②考えられる不正の種類を選択</p>
+                    <p>③「報告する」ボタンをクリック</p>
+                </div>
+            </div>
+<h2>Answer</h2>
+<div class="answer_select">
+    <h3><span id="user_answer">　</span>行目が</h3>
+<select id="suspicious_type">
+    <option value="suspicious_time">怪しい時間のアクセス</option>
+    <option value="suspicious_place">怪しい地域からのアクセス</option>
+    <option value="sql_injection">SQLインジェクション</option>
+    <option value="scripting">クロスサイトスクリプティング</option>
+    <option value="brute_force">ブルートフォース攻撃</option>
+    <option value="malware">マルウェア感染または不正なAPIリクエスト</option>
+    <option value="forbidden_unauthorized">アクセス権がない、または認証されていないユーザーである</option>
+</select>
+<h3>の疑いがある</h3>
+</div>
+<h2 id="answer_btn">報告する</h2>
+<h2 id="is_true">　</h2>
+<br>
+<h4>《未然に防いだ不正アクセスlist》</h4>
+<p id="correct_list"></p>
+        </div>
+    </div>
+
+    <div id="dictionary">
+        <div id="dictionary_menu">
+<!-- <p>怪しい時間のアクセス</p>
+<p>怪しい地域からのアクセス</p>
+<p>SQLインジェクション</p>
+<p>クロスサイトスクリプティング</p>
+<p>ブルートフォース攻撃</p>
+<p>マルウェア感染</p>
+<p>アクセス権がない、または認証されていないユーザー</p>
+<p>正常なログ</p> -->
+</div>
+<div id="dictionary_main">
+<h1 id="dictionary_title"></h1>
+<div id="dictionary_text"><p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p></div>
+</div>
+    </div>
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            function generateLogs() {
+    let logs = [];
+    const normalIPs = ["192.168.1.10", "172.16.0.5"];
+    const suspiciousIPs = ["203.0.113.42", "195.91.253.99"]; 
+    const suspicious_place_IPs = ["2.57.0.255", "5.8.69.255"]; // ロシアなど
+    const logTypes = ["operation", "authentication", "access", "event", "communication", "error"];
+    const suspiciousQueries = ["' OR '1'='1", "'; DROP TABLE users; --", "<script>alert('XSS')/script>"];
+    const StatusCodes=["200","400","401","403","429","500"]
+
+    const TimeList=[];
+    for(let i = 0; i < 19; i++){
+        let date = new Date();
+
+        let year=2024;
+        let month=Math.random()*12
+        let day=Math.random()*30
+        let hour=Math.random()*(22-8)+8
+        let japanese_hour=hour-9
+        let minute=Math.random()*59
+        let seconds=Math.random()*59
+        // console.log(hour)
+
+        date.setFullYear(year);
+date.setMonth(month);
+date.setDate(day);
+date.setHours(hour+9);
+date.setMinutes(minute);
+date.setSeconds(seconds);
+// console.log("a")
+// console.log(date.toISOString())
+// console.log("a")
+TimeList.push(date)
+
+    }
+
+    // 1️⃣ **SQLインジェクション**
+    for (let i = 0; i < 2; i++) { // 3件の不正ログ
+        let ip = suspiciousIPs[Math.floor(Math.random() * suspiciousIPs.length)];
+        let logType = Math.random() < 0.5 ? logTypes[0] : logTypes[1];
+        let status_code = Math.random() < 0.5 ? StatusCodes[1] : StatusCodes[5];
+        let details = {};
+
+if (logType === "authentication") {
+            details.error_code = "SQL syntax error near 'OR 1=1'"
+        }
+else if (logType === "operation") {
+            details.error_code = "SQL syntax error near '; DROP TABLE users; --"
+        }
+
+        logs.push({
+            // timestamp: new Date().toISOString(),
+            timestamp: TimeList[Math.floor(Math.random() * TimeList.length)].toISOString(),
+            ip,
+            logType,
+            status_code,
+            details:{ErrorCode:"ErrorCode: "+details.error_code},
+            isSuspicious: "sql_injection"
+        });
+    }
+
+//管理者ページにアクセスしようとしている
+// for (let i = 0; i < 1; i++) { // 3件の不正ログ
+//         let ip = suspiciousIPs[Math.floor(Math.random() * suspiciousIPs.length)];
+//         let logType = logTypes[2];
+//         let details = {};
+
+//         if (logType === "access") {
+//             details.url = "/admin";
+//             // details.query = suspiciousQueries[Math.floor(Math.random() * suspiciousQueries.length)];
+//         }
+//         logs.push({
+//             timestamp: new Date().toISOString(),
+//             ip,
+//             logType,
+//             details:{Url:details.url,ErrorCode:details.query},
+//             isSuspicious: "access_admin"
+//         });
+//     }
+
+//マルウェア感染または不正なAPIリクエスト
+for (let i = 0; i < 1; i++) { // 3件の不正ログ
+        let ip = suspiciousIPs[Math.floor(Math.random() * suspiciousIPs.length)];
+        let logType = logTypes[4];
+        let status_code = Math.random() < 0.5 ? StatusCodes[3] : StatusCodes[5];
+        let details = {};
+
+        if (logType === "communication") {
+            details.error_code="Detected execution of suspicious file:/download_virus"
+            // details.query = suspiciousQueries[Math.floor(Math.random() * suspiciousQueries.length)];
+        }
+        logs.push({
+            timestamp: TimeList[Math.floor(Math.random() * TimeList.length)].toISOString(),
+            ip,
+            logType,
+            status_code,
+            details:{ErrorCode:"ErrorCode: "+details.error_code},
+            isSuspicious: "malware"
+        });
+    }
+
+//アクセス権がない403、または認証されていないユーザー401
+for (let i = 0; i < 2; i++) { // 3件の不正ログ
+        let ip = suspiciousIPs[Math.floor(Math.random() * suspiciousIPs.length)];
+        let logType = Math.random() < 0.5 ? logTypes[0] : logTypes[1];
+        let status_code;
+        let details = {};
+
+if (logType === "authentication") {
+            details.error_code = "401"
+            status_code=StatusCodes[2]
+        }
+else if (logType === "operation") {
+            details.error_code = "403"
+            status_code=StatusCodes[3]
+        }
+
+        logs.push({
+            timestamp: TimeList[Math.floor(Math.random() * TimeList.length)].toISOString(),
+            ip,
+            logType,
+            status_code,
+            details:{ErrorCode:"ErrorCode: "+details.error_code},
+            isSuspicious: "forbidden_unauthorized"
+        });
+    }
+
+//ログイン時間が深夜
+for (let i = 0; i < 1; i++) { // 3件の不正ログ
+        let ip = suspiciousIPs[Math.floor(Math.random() * suspiciousIPs.length)];
+        let logType = logTypes[2];
+let status_code=StatusCodes[0]
+        let details = {};
+        let error_time=new Date(2024,11,13,2-15,18,15);
+        // error_time.setHours(2024,11,13,2,18,15)
+
+        logs.push({
+            timestamp:error_time.toISOString(),
+            ip,
+            logType,
+            status_code,
+            details,
+            isSuspicious: "suspicious_time"
+        });
+    }
+
+//アクセスしようとした地域が怪しい
+for (let i = 0; i < 2; i++) { // 3件の不正ログ
+        let ip = suspicious_place_IPs[Math.floor(Math.random() * suspicious_place_IPs.length)];
+        let logType = logTypes[2];
+        let status_code=StatusCodes[3]
+        let details_message = "Access from a restricted location";
+        let detected_country = "russia";
+
+        logs.push({
+            timestamp:TimeList[Math.floor(Math.random() * TimeList.length)].toISOString(),
+            ip,
+            logType,
+            status_code,
+            details:{ErrorCode:"ErrorCode: "+details_message , DetectedCountry:"DetectedCountry: "+detected_country},
+            isSuspicious: "suspicious_place"
+        });
+    }
+
+    // 3️⃣ **正常なログを作る**
+    for (let i = 0; i < 6; i++) {
+        let ip = normalIPs[Math.floor(Math.random() * normalIPs.length)];
+        let logType = logTypes[Math.floor(Math.random() * logTypes.length)];
+        let status_code=StatusCodes[0]
+        logs.push({
+            timestamp: TimeList[Math.floor(Math.random() * TimeList.length)].toISOString(),
+            ip,
+            logType,
+            status_code,
+            details: { action: "normal activity" },
+            isSuspicious: "normal"
+        });
+    }
+
+    // 4️⃣ **シャッフル**
+    logs = logs.sort(() => Math.random() - 0.5);
+
+        // 2️⃣ **ログイン失敗の連続ログ**
+        let failedUser = "admin";
+    let failedIP = suspiciousIPs[Math.floor(Math.random() * suspiciousIPs.length)];
+    let status_code = Math.random() < 0.5 ? StatusCodes[2] : StatusCodes[4];
+    let brute_force_time=TimeList[Math.floor(Math.random() * TimeList.length)].toISOString()
+    for (let i = 0; i < 5; i++) { // 5回連続失敗
+        logs.push({
+            timestamp: brute_force_time,
+            ip: failedIP,
+            logType: "authentication",
+            status_code,
+            details:  {status: "status: failed", user: "user: "+failedUser} ,
+            isSuspicious: "brute_force"
+        });
+    } 
+    logs.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+    return logs;
+}
+
+let LogLines=generateLogs();
+let lines=[];
+let UserAnswer=document.getElementById("user_answer");
+let SuspiciousType=document.getElementById("suspicious_type");
+
+// LogLines.forEach(function(ResultLog) {
+//     document.getElementById("log_table").innerHTML+=JSON.stringify(ResultLog, (key, value) => 
+//     key === "isSuspicious" ? undefined : value, 2)+"<br><br>";
+// });
+// LogLines.forEach(function(ResultLog) {
+//     document.getElementById("timestamp_data").innerHTML=JSON.stringify(ResultLog.timestamp, null, 2)
+//     document.getElementById("ip_data").innerHTML=JSON.stringify(ResultLog.ip, null, 2)
+//     document.getElementById("logType_data").innerHTML=JSON.stringify(ResultLog.logType, null, 2)
+//     document.getElementById("details_data").innerHTML=JSON.stringify(ResultLog.details, null, 2)+"<br><br>";
+// });
+
+
+LogLines.forEach(function(ResultLog,index) {
+    // let ResultLog_details_words=JSON.stringify(ResultLog.details, null, 2)
+    let ResultLog_details_words=Object.values(ResultLog.details).join("<br>")
+    let lineNumber = index + 1; 
+    let row = `<tr id="line_${lineNumber}" name="${lineNumber}">
+        <td>${lineNumber}</td>
+        <td>${ResultLog.timestamp}</td>
+        <td>${ResultLog.ip}</td>
+        <td>${ResultLog.logType}</td>
+        <td>${ResultLog.status_code}</td>
+        <td>${ResultLog_details_words}</td>
+    </tr>`;
+    document.getElementById("table_body").innerHTML += row;
+
+//     row.addEventListener("click", function(event) {
+//     const tr = event.target.closest("tr");
+
+//     if (tr) {
+//       const currentColor = tr.style.backgroundColor;
+//       if (
+//         currentColor === "#FBFCFD" ||
+//         currentColor === "rgb(251, 252, 253)"
+//       ) {
+//         tr.style.backgroundColor = "#96e8e8";
+//       } else {
+//         tr.style.backgroundColor = "#FBFCFD";
+//       }
+//     }
+//   });
+});
+console.log(LogLines[6].ip)
+console.log(LogLines[6].isSuspicious)
+
+
+
+
+
+
+//行クリックで色と回答欄に表示
+// for (let i = 1; i <= 20; i++) {
+//     let line=document.getElementById(`line_${i}`)
+//     lines.push(line);
+//     line.addEventListener("click",function(event){
+//         let tr = event.target.closest("tr");
+//         if(tr){
+//         if(tr.style.backgroundColor==='#FBFCFD'){
+//             tr.style.backgroundColor='#96e8e8';
+//         }
+//         else{
+//             tr.style.backgroundColor='#FBFCFD';
+//         }
+//     }
+//     },false);
+// }
+
+// 行クリックで色変更 + 回答欄に行番号表示 + 得点を記入
+let UserSelectLine
+for (let i = 1; i <= 20; i++) {
+    let line = document.getElementById(`line_${i}`);
+    if (line) {
+        line.addEventListener("click", function () {
+            // 🎨 背景色のトグル処理
+            if (line.style.backgroundColor === '' || line.style.backgroundColor === 'rgb(251, 252, 253)') {
+                line.style.backgroundColor = '#96e8e8'; // 選択時の色
+                UserAnswer.textContent = i;
+                UserSelectLine=i;
+            } else {
+                line.style.backgroundColor = ''; // 元に戻す
+                UserAnswer.textContent = "";
+                UserSelectLine="";
+            }
+
+        });
+    }
+}
+
+
+let IsTrue=document.getElementById("is_true")
+let AnswerBtn=document.getElementById("answer_btn")
+let CorrectList=document.getElementById("correct_list")
+let CorrectListNumber=0
+let Score=document.getElementById("score");
+
+
+
+// if(UserSelectLine && SuspiciousType){
+    AnswerBtn.addEventListener("click", function () {
+        IsTrue.textContent=""
+        console.log("UserSelectLine: "+UserSelectLine)
+console.log("SuspiciousType.value: "+SuspiciousType.value)
+console.log("isSuspicious: "+LogLines[UserSelectLine-1].isSuspicious)
+    if(LogLines[UserSelectLine-1].isSuspicious===SuspiciousType.value){
+        IsTrue.textContent="正解"
+        CorrectList.innerHTML+="・"+UserSelectLine+"行目の"+SuspiciousType.value+'<br>'
+        CorrectListNumber+=1
+        Score.textContent=CorrectListNumber
+        line.style.backgroundColor = ''; 
+    //         row.addEventListener("click", function(event) {
+    // const tr = event.target.closest("tr");
+
+    // if (tr) {
+    //   const currentColor = tr.style.backgroundColor;
+    //   if (
+    //     currentColor === '#96e8e8'
+    //   ) {
+    //     tr.style.backgroundColor = "#96e8e8";
+    //   } else {
+    //     tr.style.backgroundColor = "";
+    //   }
+    // }
+//   });
+    }
+    else{
+        IsTrue.textContent="不正解"
+        line.style.backgroundColor = ''; 
+    }
+})
+// }
+
+
+// let line=document.getElementById(`line_1`)
+// if(line){
+//     line.addEventListener("click",function(event){
+//         let tr = event.target.closest("tr");
+//         if(tr){
+//         if(tr.style.backgroundColor==='#FBFCFD'){
+//             tr.style.backgroundColor='#96e8e8';
+//         }
+//         else{
+//             tr.style.backgroundColor='#FBFCFD';
+//         }
+//     }
+// })
+// }
+
+
+//infoマーク
+let InfoImage=document.getElementById("info_image");
+let InfoDirect=document.getElementById("info_direct");
+if(InfoImage){
+    InfoImage.addEventListener("click",function(){
+        if(InfoDirect.style.display==='none'){
+            InfoDirect.style.display='block';
+        }
+        else{
+            InfoDirect.style.display='none';
+        }
+    },false);
+}
+
+        })
+    </script>
+</body>
+</html>
