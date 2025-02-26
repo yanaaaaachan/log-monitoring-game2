@@ -363,13 +363,26 @@ console.log(LogLines[6].isSuspicious)
 //     }
 //     },false);
 // }
+let IsTrue=document.getElementById("is_true")
+let AnswerBtn=document.getElementById("answer_btn")
+let CorrectList=document.getElementById("correct_list")
+let CorrectListNumber=0
+let Score=document.getElementById("score");
+
 
 // 行クリックで色変更 + 回答欄に行番号表示 + 得点を記入
 let UserSelectLine
 for (let i = 1; i <= 20; i++) {
     let line = document.getElementById(`line_${i}`);
     if (line) {
+        
         line.addEventListener("click", function () {
+            for (let j = 1; j <= 20; j++) {
+                let otherLine = document.getElementById(`line_${j}`);
+                if (otherLine) {
+                    otherLine.style.backgroundColor = ''; // 元の色に戻す
+                }
+            }
             // 🎨 背景色のトグル処理
             if (line.style.backgroundColor === '' || line.style.backgroundColor === 'rgb(251, 252, 253)') {
                 line.style.backgroundColor = '#96e8e8'; // 選択時の色
@@ -383,14 +396,13 @@ for (let i = 1; i <= 20; i++) {
 
         });
     }
+    AnswerBtn.addEventListener("click", function () {
+        line.style.backgroundColor = ''; 
+    })
 }
 
 
-let IsTrue=document.getElementById("is_true")
-let AnswerBtn=document.getElementById("answer_btn")
-let CorrectList=document.getElementById("correct_list")
-let CorrectListNumber=0
-let Score=document.getElementById("score");
+
 
 
 
