@@ -2,18 +2,25 @@ body{
     background-color: #E6E5E2;
     color:rgb(70, 70, 70);
 }
-
 .header{
     display: flex;
     background-color: #4D4535;
+    height: 0vh;
 }
 .header h1{
     margin-left: 90%;
     color: #FBFCFD;
 }
-
+.table_area{
+    overflow-y: scroll;
+    /* height: 100vh; */
+    height:70vh;
+    border: solid 2px #4D4535;
+    border-radius: 3px;
+}
 th,td{
     border: solid 1px #4D4535;
+    white-space:nowrap
 }
 tr{
     background-color: #FBFCFD;
@@ -21,6 +28,10 @@ tr{
 }
 th{
     cursor: default;
+    position:sticky;
+    top:0;
+    left:0;
+    background-color: #FBFCFD;
 }
 #info_image{
     width:20px;
@@ -35,34 +46,52 @@ color:white;
 padding:20px;
 }
 .main{
-    display: flex;
-    margin:40px 0px 40px 10px;
+    /* display: flex; */
+    margin:5px 0px 0px 0px;
+    /* height: 85vh; */
 }
 .answer_area{
     border: solid 3px #4D4535;
-    padding:10px;
-    margin-left: 20px;
+    padding:0px 10px 0px 10px;
+    margin-top: 10px;
     margin-right: 0px;
-    width:30%;
+    width:40%;
     background-color: white;
+}
+.is_true_box{
+    border: solid 3px #4D4535;
+    padding:0px 10px 0px 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: white;
+    width:40%;
 }
 .answer_area h2{
     text-align: center;
+}
+.answer_box{
+    display: flex;
+}
+.answer_box2{
+    display: flex;
 }
 /* .answer_select{
     position: absolute;
 } */
 #answer_btn{
     background-color: #28A6A5;
-    margin-left: 15%;
+    margin-left: 5%;
     cursor: pointer;
+    margin-top: 50px;
+    height:fit-content;
+
 }
 #answer_btn{
     display: block;
     background-color: #28A6A5;
     width:fit-content;
     transition: background-color 0.3s, transform 0.3s;
-    padding: 20px 50px;
+    padding: 10px 10px;
     text-align: center;
     border-color: aliceblue;
     box-shadow: 0 7px 0 #175e5e;
@@ -74,7 +103,7 @@ padding:20px;
     transform: translateY(4px);
 }
 #suspicious_type{
-    width:100%;
+    width:90%;
 }
 #isTrue{
     color:#28A6A5;

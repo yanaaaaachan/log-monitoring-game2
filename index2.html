@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+
+    </div>
+    <div class="start">
+        <input type="textarea" id="name" placeholder="名前を入力してください">
+        <div id="start_btn">start</div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let StartBtn = document.getElementById("start_btn")
+            StartBtn.addEventListener("click", function () {
+                let name = document.getElementById("name").value
+            });
+        });
+    </script>
+</body>
+</html>
